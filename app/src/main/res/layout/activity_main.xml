@@ -13,28 +13,21 @@
         android:hint="icon居中效果"
         app:drawableIcon="@drawable/search_black"
         app:isCenter="true"
+        app:isOpen="true"
         app:isShowHint="true"
         app:isShowLeft="false" />
 
     <com.green.hand.mylibrary.CenterEdittext
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:drawablePadding="10dp"
-        android:gravity="center_horizontal"
+        android:drawableLeft="@drawable/search_black"
         android:hint="普通edittext效果"
-        android:visibility="gone"
-        app:isCenter="false"
-        app:isShowHint="false"
-        app:isShowLeft="false" />
+        app:isOpen="false" />
 
     <com.green.hand.mylibrary.CenterEdittext
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:drawablePadding="10dp"
         android:hint="未输入icon居中；输入后icon居左"
-        android:visibility="gone"
         app:isCenter="true"
         app:isShowHint="false"
         app:isShowLeft="true" />

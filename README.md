@@ -15,9 +15,9 @@ dependencies {
         app:isShowLeft="false" />           
 
 ## **其他方法**  
+isOpen　　　　~~~~~~~~>　是否开启使用，默认为true,为false时和普通Edittext一致  
 isCenter　　　~~~~~~~~>　是否居中显示，默认为false  
 isShowLeft　　~~~~~~~~>　输入后icon是否居左显示,默认为false  
 isShowHint　　~~~~~~~~>　输入后hint是否显示，默认为true  
 drawableIcon　~~~~~~~~>　icon资源，不填有默认图片  
-
 #### **欢迎Start或提issues！**

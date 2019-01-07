@@ -19,9 +19,10 @@ public class CenterEdittext extends EditText {
     private boolean isShowCenter;//是否居中显示icon，默认为不居中
     private boolean isShowLeft;//键盘打开后icon是否显示在左边，默认为不显示icon
     private boolean isShowHint;//键盘打开后是否显示提示文字,默认为显示
-    private boolean isDraw = true;//是否绘制
+    private boolean isOpen = true;//是否开启使用,默认为true
+
+    private boolean isDraw = true;//是否绘制,配合居中显示使用
     private String hintText;
-    // private Drawable[] drawables;
 
     public CenterEdittext(Context context) {
         super(context);
@@ -54,43 +55,47 @@ public class CenterEdittext extends EditText {
             isShowCenter = array.getBoolean(R.styleable.CenterEdittext_isCenter, false);
             isShowLeft = array.getBoolean(R.styleable.CenterEdittext_isShowLeft, false);
             isShowHint = array.getBoolean(R.styleable.CenterEdittext_isShowHint, true);
+            isOpen = array.getBoolean(R.styleable.CenterEdittext_isOpen, true);
             drawableIcon = array.getResourceId(R.styleable.CenterEdittext_drawableIcon, R.drawable.search_black);
             array.recycle();
         }
-        if (context instanceof Activity)
+        if (context instanceof Activity && isOpen) {
             hintText = getHint().toString();
-        SoftKeyBoardListener.setListener((Activity) context, new SoftKeyBoardListener.OnSoftKeyBoardChangeListener() {
-            @Override
-            public void keyBoardShow(int height) {//键盘处于打开状态
-                setCursorVisible(true);// 显示光标
-                isDraw = false;//重新绘制(icon居左或者不显示)
-                if (!isShowHint)
-                    setHint("");
-                else {
+            SoftKeyBoardListener.setListener((Activity) context, new SoftKeyBoardListener.OnSoftKeyBoardChangeListener() {
+                @Override
+                public void keyBoardShow(int height) {//键盘处于打开状态
+                    setCursorVisible(true);// 显示光标
+                    isDraw = false;//重新绘制(icon居左或者不显示)
+                    if (!isShowHint)
+                        setHint("");
+                    else {
+                        if (!TextUtils.isEmpty(hintText))
+                            setHint(hintText);
+                    }
+                }
+
+                @Override
+                public void keyBoardHide(int height) {//键盘处于关闭状态
+                    setCursorVisible(false);// 隐藏光标
+                    if (TextUtils.isEmpty(getText().toString()))
+                        isDraw = true;
+                    else
+                        isDraw = false;
                     if (!TextUtils.isEmpty(hintText))
                         setHint(hintText);
                 }
-            }
-
-            @Override
-            public void keyBoardHide(int height) {//键盘处于关闭状态
-                setCursorVisible(false);// 隐藏光标
-                if (TextUtils.isEmpty(getText().toString()))
-                    isDraw = true;
-                else
-                    isDraw = false;
-                if (!TextUtils.isEmpty(hintText))
-                    setHint(hintText);
-            }
-        });
+            });
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onDraw(Canvas canvas) {
+        if (!isOpen) {
+            super.onDraw(canvas);
+            return;
+        }
         if (isShowCenter && isDraw) {// 将icon绘制在中间
-            //  if (drawables == null) drawables = getCompoundDrawables();
-            //   if (drawableLeft == null) drawableLeft = drawables[0];
             setCompoundDrawablesWithIntrinsicBounds(context.getDrawable(drawableIcon), null, null, null);//绘制图片
             float textWidth = getPaint().measureText(getHint().toString());//得到文字宽度
             int drawablePadding = getCompoundDrawablePadding();//得到drawablePadding宽度
@@ -100,8 +105,6 @@ public class CenterEdittext extends EditText {
             super.onDraw(canvas);
         } else {
             if (isShowLeft) {
-                //   if (drawables == null) drawables = getCompoundDrawables();
-                //    if (drawableLeft == null) drawableLeft = drawables[0];
                 setCompoundDrawablesWithIntrinsicBounds(context.getDrawable(drawableIcon), null, null, null);
             } else {
                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
