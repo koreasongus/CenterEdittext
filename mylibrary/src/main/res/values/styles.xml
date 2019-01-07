@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CenterEdittext">
+        <attr name="isCenter" format="boolean" />
+        <attr name="isShowLeft" format="boolean" />
+        <attr name="isShowHint" format="boolean" />
+        <attr name="drawableIcon" format="reference" />
+    </declare-styleable>
+</resources>

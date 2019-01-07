@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.green.hand.mylibrary.CenterEdittext
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="10dp"
+        android:hint="icon居中效果"
+        android:visibility="gone"
+        app:isCenter="true"
+        app:isShowHint="true"
+        app:isShowLeft="false" />
+
+    <com.green.hand.mylibrary.CenterEdittext
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="10dp"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:hint="普通edittext效果"
+        app:isCenter="false"
+        app:isShowHint="false"
+        app:isShowLeft="false" />
+
+    <com.green.hand.mylibrary.CenterEdittext
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="10dp"
+        android:hint="未输入icon居中；输入后icon居左"
+        app:isCenter="true"
+        app:isShowHint="false"
+        app:isShowLeft="true" />
+
+</LinearLayout>
