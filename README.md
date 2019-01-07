@@ -2,7 +2,7 @@
 ![效果图](https://github.com/OneGreenHand/CenterEdittext/blob/master/pictor/gif.gif?raw=true)  
 ## 如何使用
 dependencies {  
-　`implementation 'com.github.OneGreenHand:CenterEdittext:v1.0'`   
+　` implementation 'com.github.OneGreenHand:CenterEdittext:v1.1'`   
 }  
 ## 布局中  
      <com.green.hand.mylibrary.CenterEdittext
