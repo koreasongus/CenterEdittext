@@ -19,7 +19,7 @@ public class CenterEdittext extends EditText {
     private boolean isShowCenter;//是否居中显示icon，默认为不居中
     private boolean isShowLeft;//键盘打开后icon是否显示在左边，默认为不显示icon
     private boolean isShowHint;//键盘打开后是否显示提示文字,默认为显示
-    private boolean isOpen = true;//是否开启使用,默认为true
+    private boolean isOpen;//是否开启使用,默认为false
 
     private boolean isDraw = true;//是否绘制,配合居中显示使用
     private String hintText;
@@ -96,16 +96,16 @@ public class CenterEdittext extends EditText {
             return;
         }
         if (isShowCenter && isDraw) {// 将icon绘制在中间
-            setCompoundDrawablesWithIntrinsicBounds(context.getDrawable(drawableIcon), null, null, null);//绘制图片
+            setCompoundDrawablesWithIntrinsicBounds(context.getResources().getDrawable(drawableIcon), null, null, null);//绘制图片
             float textWidth = getPaint().measureText(getHint().toString());//得到文字宽度
             int drawablePadding = getCompoundDrawablePadding();//得到drawablePadding宽度
-            int drawableWidth = context.getDrawable(drawableIcon).getIntrinsicWidth();//得到图片宽度
+            int drawableWidth = context.getResources().getDrawable(drawableIcon).getIntrinsicWidth();//得到图片宽度
             float bodyWidth = textWidth + drawableWidth + drawablePadding;//计算距离
             canvas.translate((getWidth() - bodyWidth - getPaddingLeft() - getPaddingRight()) / 2, 0);//最终绘制位置
             super.onDraw(canvas);
         } else {
             if (isShowLeft) {
-                setCompoundDrawablesWithIntrinsicBounds(context.getDrawable(drawableIcon), null, null, null);
+                setCompoundDrawablesWithIntrinsicBounds(context.getResources().getDrawable(drawableIcon), null, null, null);
             } else {
                 setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             }
